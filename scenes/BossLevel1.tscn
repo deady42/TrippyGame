@@ -1,0 +1,162 @@
+[gd_scene load_steps=28 format=3 uid="uid://dvtfe4x5wapl8"]
+
+[ext_resource type="Script" path="res://scripts/BossLevel1.gd" id="1_8koab"]
+[ext_resource type="Shader" path="res://shaders/BossLevel1.gdshader" id="1_f6clh"]
+[ext_resource type="Texture2D" uid="uid://djh2csmq8jdl6" path="res://textures/emoji_26.png" id="2_f4swy"]
+[ext_resource type="PackedScene" uid="uid://dvbs7if81fflj" path="res://scenes/Player.tscn" id="3_dys2t"]
+[ext_resource type="PackedScene" uid="uid://b5sx5xtou6cpm" path="res://scenes/BossHealthBar.tscn" id="3_q5ypu"]
+[ext_resource type="PackedScene" uid="uid://cppi752ah7n72" path="res://scenes/Boss.tscn" id="4_mah2e"]
+[ext_resource type="PackedScene" uid="uid://ca4djkfwj5ao8" path="res://scenes/Pause.tscn" id="4_xo50m"]
+[ext_resource type="PackedScene" uid="uid://bsrludotfsvq0" path="res://scenes/DevConsole.tscn" id="5_1uxa2"]
+[ext_resource type="AudioStream" uid="uid://fetfwa308bvh" path="res://audio/boss_noise.mp3" id="9_aptq6"]
+[ext_resource type="AudioStream" uid="uid://bkp6xly62aiu" path="res://audio/calm_music.mp3" id="9_t0da4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q3ipg"]
+seed = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7hcq"]
+seamless = true
+noise = SubResource("FastNoiseLite_q3ipg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ko33r"]
+seed = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_umqfk"]
+seamless = true
+noise = SubResource("FastNoiseLite_ko33r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vedns"]
+shader = ExtResource("1_f6clh")
+shader_parameter/skyColor = Color(0, 0, 0, 1)
+shader_parameter/darkness = 0.0
+shader_parameter/glitchness = 0.0
+shader_parameter/noise_tex_1 = SubResource("NoiseTexture2D_h7hcq")
+shader_parameter/noise_tex_2 = SubResource("NoiseTexture2D_umqfk")
+shader_parameter/skyTexture = ExtResource("2_f4swy")
+
+[sub_resource type="Sky" id="Sky_6drqn"]
+sky_material = SubResource("ShaderMaterial_vedns")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_f11sd"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_6drqn")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_528hy"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8fdt"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n30j"]
+size = Vector3(1, 32, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1gmss"]
+size = Vector3(1, 32, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0kp5"]
+size = Vector3(100, 32, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ibh12"]
+size = Vector3(100, 32, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pt27"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16kms"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ke7se"]
+material = SubResource("StandardMaterial3D_16kms")
+size = Vector3(42.115, 35.105, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t15ia"]
+size = Vector3(100, 128, 100)
+
+[node name="BossLevel1" type="Node3D"]
+script = ExtResource("1_8koab")
+boss = ExtResource("4_mah2e")
+bossHealthBar = ExtResource("3_q5ypu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f11sd")
+
+[node name="Player" parent="." instance=ExtResource("3_dys2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+
+[node name="Pause" parent="Player" instance=ExtResource("4_xo50m")]
+
+[node name="DevConsole" parent="Player" instance=ExtResource("5_1uxa2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+visible = false
+mesh = SubResource("PlaneMesh_528hy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_j8fdt")
+
+[node name="BossInitialSpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+collision_mask = 14
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5, 16, 0)
+shape = SubResource("BoxShape3D_4n30j")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.5, 16, 0)
+shape = SubResource("BoxShape3D_1gmss")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 49.5)
+shape = SubResource("BoxShape3D_r0kp5")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -49.5)
+shape = SubResource("BoxShape3D_ibh12")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.5, 0)
+shape = SubResource("BoxShape3D_4pt27")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.2437)
+visible = false
+mesh = SubResource("BoxMesh_ke7se")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+
+[node name="UndergroundArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -74, 0)
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UndergroundArea"]
+shape = SubResource("BoxShape3D_t15ia")
+
+[node name="NoiseAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_aptq6")
+volume_db = -80.0
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_t0da4")
+pitch_scale = 0.9
+autoplay = true
+
+[connection signal="timeout" from="BossInitialSpawnTimer" to="." method="_on_boss_initial_spawn_timer_timeout"]
+[connection signal="body_entered" from="UndergroundArea" to="." method="_on_underground_area_body_entered"]

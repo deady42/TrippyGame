@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://hfvbaoifsuim"]
+
+[ext_resource type="Texture2D" uid="uid://djh2csmq8jdl6" path="res://textures/emoji_26.png" id="1_3dte1"]
+[ext_resource type="Script" path="res://scripts/YouCantEscape.gd" id="1_12j0f"]
+[ext_resource type="Shader" path="res://shaders/Distortion.gdshader" id="2_utuuo"]
+[ext_resource type="FontFile" uid="uid://dsmdtpua2ygne" path="res://fonts/BEBAS NEUE.TTF" id="3_jkole"]
+[ext_resource type="AudioStream" uid="uid://yktcg8iarr82" path="res://audio/tv_static.mp3" id="5_pr5n4"]
+[ext_resource type="Shader" path="res://shaders/PixelOverlay.gdshader" id="6_4iqsl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ebst"]
+seed = 9
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pdhk3"]
+width = 1080
+height = 720
+seamless = true
+noise = SubResource("FastNoiseLite_7ebst")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_32xq3"]
+seed = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3aq5s"]
+width = 1080
+height = 720
+seamless = true
+noise = SubResource("FastNoiseLite_32xq3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujg1b"]
+shader = ExtResource("2_utuuo")
+shader_parameter/distortion_factor = 0.0
+shader_parameter/distortion_speed = 2.0
+shader_parameter/noise_tex_1 = SubResource("NoiseTexture2D_pdhk3")
+shader_parameter/noise_tex_2 = SubResource("NoiseTexture2D_3aq5s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flrr6"]
+shader = ExtResource("6_4iqsl")
+shader_parameter/is_color_per_channel_enabled = true
+shader_parameter/target_resolution = Vector2(256, 144)
+
+[node name="YouCantEscape" type="Node2D"]
+script = ExtResource("1_12j0f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+scale = Vector2(4.21875, 2.8125)
+texture = ExtResource("1_3dte1")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_right = 1080.0
+offset_bottom = 720.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jkole")
+theme_override_font_sizes/font_size = 128
+text = "YOU CAN'T ESCAPE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ujg1b")
+offset_right = 1080.0
+offset_bottom = 720.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_flrr6")
+offset_right = 1080.0
+offset_bottom = 720.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="StaticAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_pr5n4")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

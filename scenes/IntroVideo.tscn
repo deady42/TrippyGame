@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://csjy4rnsfp6pc"]
+
+[ext_resource type="VideoStream" path="res://videos/intro_video.ogv" id="1_b1v8h"]
+[ext_resource type="Script" path="res://scripts/IntroVideo.gd" id="2_nkfx4"]
+[ext_resource type="AudioStream" uid="uid://bvgugrhlq2ls8" path="res://audio/emoji_26_evil_laughter.mp3" id="3_nmabp"]
+
+[node name="IntroVideo" type="VideoStreamPlayer"]
+offset_right = 1088.0
+offset_bottom = 720.0
+stream = ExtResource("1_b1v8h")
+volume_db = -4.0
+autoplay = true
+script = ExtResource("2_nkfx4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nmabp")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

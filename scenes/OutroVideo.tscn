@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqw3vc6x0qcpx"]
+
+[ext_resource type="VideoStream" path="res://videos/outro_video.ogv" id="1_m3ib1"]
+[ext_resource type="Script" path="res://scripts/OutroVideo.gd" id="1_w382n"]
+
+[node name="OutroVideo" type="VideoStreamPlayer"]
+offset_right = 1088.0
+offset_bottom = 720.0
+stream = ExtResource("1_m3ib1")
+volume_db = -4.0
+autoplay = true
+script = ExtResource("1_w382n")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

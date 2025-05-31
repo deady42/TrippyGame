@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3xgcjhdtymo"]
+
+[ext_resource type="Script" path="res://scripts/Emoji26Projectile.gd" id="1_qt8u4"]
+[ext_resource type="Texture2D" uid="uid://bx81mau1q2hlw" path="res://textures/emoji_26_projectile.png" id="2_4ct6m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jp0no"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_4ct6m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fk3ox"]
+material = SubResource("StandardMaterial3D_jp0no")
+size = Vector2(0.64, 0.64)
+orientation = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rlxiq"]
+radius = 0.32
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vkc2a"]
+radius = 0.32
+
+[node name="Emoji26Projectile" type="CharacterBody3D"]
+collision_layer = 8
+script = ExtResource("1_qt8u4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_fk3ox")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_rlxiq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vkc2a")
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

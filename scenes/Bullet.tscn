@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnj2wbw2443oy"]
+
+[ext_resource type="Texture2D" uid="uid://dqsjucsxpgovm" path="res://textures/bullet.png" id="1_4mdcq"]
+[ext_resource type="Script" path="res://scripts/Bullet.gd" id="1_fiw3d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hga16"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_4mdcq")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h6ght"]
+material = SubResource("StandardMaterial3D_hga16")
+size = Vector2(0.64, 0.64)
+orientation = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_utoef"]
+radius = 0.333
+
+[node name="Bullet" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 33
+script = ExtResource("1_fiw3d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 0.6
+mesh = SubResource("PlaneMesh_h6ght")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_utoef")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+visible = false
+texture = ExtResource("1_4mdcq")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

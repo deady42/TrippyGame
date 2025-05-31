@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqw3vc6x0qcpx"]
+
+[ext_resource type="VideoStream" path="res://videos/outro_video.ogv" id="1_m3ib1"]
+[ext_resource type="Script" path="res://scripts/OutroVideo.gd" id="1_w382n"]
+[ext_resource type="Texture2D" uid="uid://cd6sgkalo1i6a" path="res://certificate.jpg" id="3_dcoak"]
+
+[node name="OutroVideo" type="VideoStreamPlayer"]
+offset_right = 1088.0
+offset_bottom = 720.0
+stream = ExtResource("1_m3ib1")
+autoplay = true
+script = ExtResource("1_w382n")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(668, 938)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(334, 469)
+texture = ExtResource("3_dcoak")
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport"]
+offset_left = 207.595
+offset_top = 46.535
+offset_right = 295.595
+offset_bottom = 69.535
+text = "TEST LABEL"
+
+[connection signal="finished" from="." to="." method="_on_finished"]

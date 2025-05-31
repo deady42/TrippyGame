@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn8tusib61q13"]
+
+[ext_resource type="Script" path="res://scripts/DeathScene.gd" id="1_fahll"]
+[ext_resource type="VideoStream" path="res://videos/death_video.ogv" id="1_ydwog"]
+
+[node name="DeathScene" type="VideoStreamPlayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("1_ydwog")
+volume_db = -4.0
+autoplay = true
+script = ExtResource("1_fahll")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

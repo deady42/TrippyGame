@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://fapj733x0pc"]
+
+[ext_resource type="Script" path="res://scripts/PathFinder.gd" id="1_2b1qa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_elrtx"]
+
+[node name="PathFinder" type="CharacterBody3D"]
+script = ExtResource("1_2b1qa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_elrtx")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = -1.0
+navigation_layers = 2
+debug_enabled = true

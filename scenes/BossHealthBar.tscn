@@ -1,0 +1,166 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5sx5xtou6cpm"]
+
+[ext_resource type="Script" path="res://scripts/BossHealthBar.gd" id="1_ydcfd"]
+[ext_resource type="Texture2D" uid="uid://djh2csmq8jdl6" path="res://textures/emoji_26.png" id="2_eo0ic"]
+[ext_resource type="Texture2D" uid="uid://x2kbt3pv0fxx" path="res://textures/boss_health_bar_over.png" id="2_vbxw8"]
+
+[sub_resource type="Gradient" id="Gradient_vw3p4"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tqu8t"]
+gradient = SubResource("Gradient_vw3p4")
+width = 576
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3262b"]
+viewport_path = NodePath("SubViewport")
+
+[node name="BossHealthBar" type="Node2D"]
+position = Vector2(-902, -16)
+script = ExtResource("1_ydcfd")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 252.0
+offset_top = 16.0
+offset_right = 828.0
+offset_bottom = 80.0
+value = 68.0
+texture_under = SubResource("GradientTexture2D_tqu8t")
+texture_over = ExtResource("2_vbxw8")
+texture_progress = SubResource("ViewportTexture_3262b")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(576, 64)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="SubViewport"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(64, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(128, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(192, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D5" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(256, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D6" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(320, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D7" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(384, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D8" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(448, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D9" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(512, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D10" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(0, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D11" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(64, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D12" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(128, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D13" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(192, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D14" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(256, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D15" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(320, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D16" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(384, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D17" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(448, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D18" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(512, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D19" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(-64, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D20" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(-128, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D21" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(-64, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false
+
+[node name="Sprite2D22" type="Sprite2D" parent="SubViewport/CharacterBody2D"]
+position = Vector2(-128, 64)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eo0ic")
+centered = false

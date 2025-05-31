@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://bdvm8akp4i423"]
+
+[ext_resource type="Texture2D" uid="uid://bm67077euj470" path="res://textures/pugalka.png" id="1_7ufc7"]
+[ext_resource type="Script" path="res://scripts/Pugalka.gd" id="1_ga2g5"]
+[ext_resource type="AudioStream" uid="uid://pqntfho2b1au" path="res://audio/pugalka_1.mp3" id="3_lrl7k"]
+[ext_resource type="AudioStream" uid="uid://dlq6don13nnmc" path="res://audio/pugalka_2.mp3" id="4_5hbx2"]
+[ext_resource type="AudioStream" uid="uid://dgivo3mt03v70" path="res://audio/pugalka_3.mp3" id="5_s807t"]
+[ext_resource type="AudioStream" uid="uid://dmttkl315x3y7" path="res://audio/pugalka_appear.mp3" id="6_tt4y8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rt20k"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_7ufc7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ytuw1"]
+material = SubResource("StandardMaterial3D_rt20k")
+orientation = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dshy4"]
+radius = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tgnd"]
+size = Vector3(2, 2, 0.25)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fowe1"]
+streams_count = 3
+stream_0/stream = ExtResource("3_lrl7k")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_5hbx2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_s807t")
+stream_2/weight = 1.0
+
+[node name="Pugalka" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ga2g5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 0.5
+mesh = SubResource("PlaneMesh_ytuw1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_dshy4")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3tgnd")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_fowe1")
+
+[node name="Appearance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tt4y8")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
