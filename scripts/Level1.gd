@@ -28,6 +28,8 @@ var tremble = 0.0
 var groundTrembleTimerMode = false
 
 func _ready():
+	AudioServer.set_bus_mute(1, false)
+	AudioServer.set_bus_mute(2, false)
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("EnemyAudio"), 0, false)
 	groundTrembleTimer.wait_time = randf_range(10.0, 30.0)
 	groundTrembleTimer.start()

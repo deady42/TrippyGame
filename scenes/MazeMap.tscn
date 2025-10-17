@@ -1,7 +1,8 @@
-[gd_scene load_steps=68 format=3 uid="uid://cvyikswex0myo"]
+[gd_scene load_steps=69 format=3 uid="uid://cvyikswex0myo"]
 
 [ext_resource type="Script" path="res://scripts/MazeMap.gd" id="1_7u3yn"]
 [ext_resource type="Texture2D" uid="uid://ccg51haunmdb6" path="res://textures/maze_map.png" id="2_bv734"]
+[ext_resource type="Texture2D" uid="uid://djn3jjlkcrv2d" path="res://textures/maze_map_solution.png" id="3_maima"]
 [ext_resource type="Texture2D" uid="uid://ctf8fecnj0vsh" path="res://textures/map_player_marker.png" id="3_p71op"]
 [ext_resource type="Texture2D" uid="uid://cc8ds04rkvxsk" path="res://textures/map_piska_marker.png" id="4_1t7dx"]
 [ext_resource type="AudioStream" uid="uid://bxnpj73lun8a7" path="res://audio/map_open.mp3" id="5_w6xrc"]
@@ -457,6 +458,11 @@ color = Color(1, 1, 1, 0.784314)
 modulate = Color(0.215686, 0.00784314, 0.407843, 1)
 texture_filter = 1
 texture = ExtResource("2_bv734")
+
+[node name="MazeMapSolution" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.878431, 0.278431, 0.764706, 1)
+texture = ExtResource("3_maima")
 
 [node name="PlayerMarker" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

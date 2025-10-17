@@ -3,6 +3,7 @@ extends Node2D
 @onready var playerMarker = $PlayerMarker
 @onready var piskaMarker = $PiskaMarker
 @onready var mapOpenAudio = $MapOpenAudio
+@onready var mazeMapSolution = $MazeMapSolution
 @onready var player = $".."
 @onready var piska = $"../../Piska"
 

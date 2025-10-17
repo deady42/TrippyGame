@@ -45,7 +45,7 @@ var isInvincible = false
 var posterizationGate = false
 var shakeGate = false
 var health = 10
-var speed = 5.0
+var speed = 10.0
 const jumpPower = 4.2
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mouseSensitivity := 0.000005
@@ -172,10 +172,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("move_jump") and is_on_floor():
 		velocity.y = jumpPower
 		jumpAudio.play()
-	if Input.is_action_pressed("move_run"):
-		speed = 10.0
-	if Input.is_action_just_released("move_run"):
+	if Input.is_action_pressed("move_sneak"):
 		speed = 5.0
+	if Input.is_action_just_released("move_sneak"):
+		speed = 10.0
 	
 	var inputDir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if is_on_floor():
@@ -306,7 +306,8 @@ func _on_main_menu_button_pressed():
 	buttonAudio.play()
 	mainMenuSprite.play("pressed")
 	buttonTimer.start()
-	menuAccessDeniedLabel.show()
+	if GlobalScript.difficulty == 1:
+		menuAccessDeniedLabel.show()
 	#await get_tree().create_timer(1).timeout
 
 func _on_button_timer_timeout():
